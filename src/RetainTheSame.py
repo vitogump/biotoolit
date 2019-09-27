@@ -37,7 +37,7 @@ infile2maplist=[]
 priority1th=int(options.columnlist[0][0])-1
 priority2nd=int(options.columnlist[0][1])-1
 if options.reforderfile1[1].endswith("gz"):
-    outfileref=gzip.open(options.reforderfile1[1],'rw')
+    outfileref=gzip.open(options.reforderfile1[1],'wb')
 else:
     outfileref=open(options.reforderfile1[1],'w')
 outfile2list=[]
@@ -148,14 +148,14 @@ def countRegionlength(selectedWinMap,winwidth,slideSize,winType="winvalue",moret
 if __name__ == '__main__':
     print(options.columnlist)
     if options.reforderfile1[0].endswith("gz"):
-        gzip.open(options.reforderfile1[0],'rb')
+        infileref=gzip.open(options.reforderfile1[0],'rt')
     else:
         infileref=open(options.reforderfile1[0],'r')
     infile2list=[]
     for infilename,outfinename in options.infilename2:
         infile2maplist.append({})
         if infilename.endswith("gz"):
-            infile2list.append(gzip.open(infilename,"rb"))
+            infile2list.append(gzip.open(infilename,"rt"))
         else:
             infile2list.append(open(infilename,"r"))
         outfile2list.append(open(outfinename,"w"))

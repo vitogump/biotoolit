@@ -4,7 +4,7 @@ Created on 2016-2-17
 @author: liurui
 '''
 from optparse import OptionParser
-import sys, re
+import sys, re,gzip
 
 
 tempfilename1=""
@@ -36,9 +36,17 @@ priority2nd=int(options.columnlist[0][1])-1
 if __name__ == '__main__':
 
     def printdiff(inreffilename,outreffile,infilename2nd):
-        infileref=open(inreffilename,'r')
+        if inreffilename.endswith("gz"):
+            infileref=gzip.open(inreffilename,'rt')
+        else:
+            infileref=open(inreffilename,'r')
+#         infileref=open(inreffilename,'r')
         outfileref=open(outreffile,'w')
-        infile2list=open(infilename2nd,"r")
+        if infilename2nd.endswith("gz"):
+            infile2list=gzip.open(infilename2nd,"rt")
+        else:
+            infile2list=open(infilename2nd,"r")        
+#         infile2list=open(infilename2nd,"r")
         infile1map={}
         infile2map={}
         maporder=[]
